@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Sorteador de números</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="container__conteudo">
+            <div class="container__informacoes">
+                <div class="container__texto">
+                    <h1>Random Number<span class="container__texto-azul"> Picker</span></h1>
+
+                    <div class="container__campo">
+                        <label class="texto__paragrafo">Amount of numbers</label>
+                        <input class="container__input" id="amountOfNumbers" type="number" min="1">
+                    </div>
+                    
+                    <div class="container__campo">
+                        <label class="texto__paragrafo">From</label>
+                        <input class="container__input" id="fromNumber" type="number" min="0">
+                    </div>
+                    
+                    <div class="container__campo">
+                        <label class="texto__paragrafo">To</label>
+                        <input class="container__input" id="toNumber" type="number" min="0">
+                    </div>
+                </div>
+                
+                <div class="chute container__botoes">
+                    <button onclick="start()" id="btn-start" class="container__botao">Start</button>
+                    <button onclick="restart()" id="btn-restart" class="container__botao-desabilitado">Restart</button>
+                </div>
+
+                <div class="container__texto" id="resultado">
+                    <label class="texto__paragrafo">Numbers drawn: 
+                        <b id="numbersDrawn">None so far</b>
+                    </label>
+                </div>
+            </div>
+
+            <img src="./img/ia.png" alt="Uma pessoa com capacete de astronauta" class="container__imagem-pessoa" />
+        </div>
+    </div>
+
+    <script src="app.js" defer></script>
+</body>
+
+</html>
