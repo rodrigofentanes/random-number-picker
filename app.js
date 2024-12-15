@@ -14,6 +14,7 @@ function start() {
   else if (fromNumber <= toNumber) {
     for (let index = 0; index < amountOfNumbers; index++) {
       const drawnNumber = getRandomIntInclusive(fromNumber, toNumber);
+
       
       if (drawnNumber) {
         listCurrentlyDrawnNumbers.push(drawnNumber);
@@ -48,9 +49,10 @@ function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   let drawnNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+
   
   if (listPreviouslyDrawnNumbers.includes(drawnNumber)) {
-    if (listPreviouslyDrawnNumbers.length > (min - max)) {
+    if (listPreviouslyDrawnNumbers.length < (min - max)) {
       return;
     }
     
