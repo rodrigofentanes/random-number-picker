@@ -40,7 +40,7 @@ function restart() {
   clearInputValue('id', 'toNumber');
   document.getElementById('btn-start').className = 'container__botao';
   document.getElementById('btn-restart').className = 'container__botao-desabilitado';
-  setHtmlContent('id', 'numbersDrawn', 'None so far');
+  setHtmlContent('id', 'numbersDrawn', 'None so far...');
   listCurrentlyDrawnNumbers = [];
   listPreviouslyDrawnNumbers = [];
 }

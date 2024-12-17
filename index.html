@@ -2,55 +2,129 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <title>Sorteador de números</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css" rel="stylesheet">
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <title>Sorteador de números</title>
 </head>
 
-<body>
-    <div class="container">
-        <div class="container__conteudo">
-            <div class="container__informacoes">
-                <div class="container__texto">
-                    <h1>Random Number<span class="container__texto-azul"> Picker</span></h1>
+<body class="bg-[url('./img/ia0-bg-img.png')] h-screen bg-cover bg-center bg-no-repeat" style="background-color: rgba(0, 0, 0, 0.274); font-family: 'Chakra Petch';">
+  <div class="isolate px-6 py-6 lg:px-8 " style="position: absolute; position-area: center; background-color: rgba(158, 158, 158, 0.603);">
 
-                    <div class="container__campo">
-                        <label class="texto__paragrafo">Amount of numbers</label>
-                        <input class="container__input" id="amountOfNumbers" type="number" min="1">
-                    </div>
-                    
-                    <div class="container__campo">
-                        <label class="texto__paragrafo">From</label>
-                        <input class="container__input" id="fromNumber" type="number" min="0">
-                    </div>
-                    
-                    <div class="container__campo">
-                        <label class="texto__paragrafo">To</label>
-                        <input class="container__input" id="toNumber" type="number" min="0">
-                    </div>
-                </div>
-                
-                <div class="chute container__botoes">
-                    <button onclick="start()" id="btn-start" class="container__botao">Start</button>
-                    <button onclick="restart()" id="btn-restart" class="container__botao-desabilitado">Restart</button>
-                </div>
-
-                <div class="container__texto" id="resultado">
-                    <label class="texto__paragrafo">Numbers drawn: 
-                        <b id="numbersDrawn">None so far</b>
-                    </label>
-                </div>
-            </div>
-
-            <img src="./img/ia.png" alt="Uma pessoa com capacete de astronauta" class="container__imagem-pessoa" />
-        </div>
+    <div class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]" aria-hidden="true">
+      <div
+        class="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
+        style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+      </div>
     </div>
 
-    <script src="app.js" defer></script>
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="text-balance text-5xl font-semibold tracking-tight text-black sm:text-6xl pb-4">
+        Random Number Picker
+      </h2>
+    </div>
+
+    <div class="mx-auto mt-16 max-w-xl sm:mt-20 text-black">
+      <div class="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
+
+        <div class="sm:col-span-2">
+          <label for="amountOfNumbers" class="block text-2xl font-semibold text-gray-900">
+            Amount of numbers
+          </label>
+          <div class="mt-2.5">
+            <input 
+              type="number" 
+              name="amountOfNumbers" 
+              id="amountOfNumbers"
+              class="block w-full rounded-md px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+              style="background-color: rgba(255, 255, 255, 0.43);"
+              min="0"
+            >
+          </div>
+        </div>
+
+        <div class="sm:col-span-2">
+          <label for="fromNumber" class="block text-2xl font-semibold text-gray-900">
+            From number
+          </label>
+          <div class="mt-2.5">
+            <input 
+              type="number" 
+              name="fromNumber" 
+              id="fromNumber"
+              class="block w-full rounded-md px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+              style="background-color: rgba(255, 255, 255, 0.43);"
+              min="0"
+            >
+          </div>
+        </div>
+
+        <div class="sm:col-span-2">
+          <label for="toNumber" class="block text-2xl font-semibold text-gray-900">
+            To number
+          </label>
+          <div class="mt-2.5">
+            <input 
+              type="number" 
+              name="toNumber" 
+              id="toNumber"
+              class="block w-full rounded-md px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+              style="background-color: rgba(255, 255, 255, 0.43);"
+              min="0"
+            >
+          </div>
+        </div>
+        
+        <div class="sm:col-span-2">
+          <label for="response" class="block text-2xl font-semibold text-gray-900">Response</label>
+          <div class="mt-2.5">
+            <textarea 
+              name="response" 
+              id="numbersDrawn" 
+              rows="5"
+              class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+              style="background-color: rgba(255, 255, 255, 0.43);"
+            >None so far...
+            </textarea>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-6">
+        <button
+          onclick="start()"
+          id="btn-start"
+          class="container__botao"
+        >
+          Start
+        </button>
+      </div>
+
+      <div class="mt-6">
+        <button
+          onclick="restart()"
+          id="btn-restart"
+          class="container__botao-desabilitado"
+        >
+          Restart
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="app.js" defer></script>
 </body>
 
 </html>
