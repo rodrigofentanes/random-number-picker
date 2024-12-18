@@ -52,13 +52,13 @@ function getRandomIntInclusive(min, max) {
 
   
   if (listPreviouslyDrawnNumbers.includes(drawnNumber)) {
-    if (listPreviouslyDrawnNumbers.length < (min - max)) {
+
+    if (listPreviouslyDrawnNumbers.length > (max - min)) {
       return;
     }
     
     else {
-      drawnNumber = getRandomIntInclusive(min, max);
-      return drawnNumber;
+      return getRandomIntInclusive(min, max);
     }
   }
 
