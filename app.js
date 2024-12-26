@@ -7,20 +7,8 @@ function start() {
   let fromNumber = parseInt(getHtmlContent('id', 'fromNumber'));
   let toNumber = parseInt(getHtmlContent('id', 'toNumber'));
 
-  if (amountOfNumbers <= 0) {
-    setHtmlContent('id', 'numbersDrawn', 'Invalid amount');
-  }
-
-  else if (fromNumber <= toNumber) {
-    for (let index = 0; index < amountOfNumbers; index++) {
-      const drawnNumber = getRandomIntInclusive(fromNumber, toNumber);
-
-      
-      if (drawnNumber) {
-        listCurrentlyDrawnNumbers.push(drawnNumber);
-      }
-    }
-  
+  if (fromNumber <= toNumber && amountOfNumbers > 0) {
+    drawNumbers(fromNumber, toNumber, amountOfNumbers);
     setHtmlContent('id', 'numbersDrawn', listCurrentlyDrawnNumbers);
   
     document.getElementById('btn-start').classList.remove('container__botao');
@@ -29,8 +17,26 @@ function start() {
     document.getElementById('btn-restart').classList.add('container__botao');
   }
 
-  else {
+  else if (amountOfNumbers <= 0) {
+    setHtmlContent('id', 'numbersDrawn', 'Invalid amount');
+  }
+
+  else if (fromNumber > toNumber) {
     setHtmlContent('id', 'numbersDrawn', 'Invalid range');
+  }
+
+  else {
+    setHtmlContent('id', 'numbersDrawn', 'Error...');
+  }
+}
+
+function drawNumbers(fromNumber, toNumber, amountOfNumbers) {
+  for (let index = 0; index < amountOfNumbers; index++) {
+    const drawnNumber = getRandomIntInclusive(fromNumber, toNumber);
+
+    if (drawnNumber) {
+      listCurrentlyDrawnNumbers.push(drawnNumber);
+    }
   }
 }
 
