@@ -1,4 +1,5 @@
 
+let setCurrentlyDrawnNumbers = new Set();
 let listCurrentlyDrawnNumbers = [];
 let listPreviouslyDrawnNumbers = [];
 
@@ -9,6 +10,9 @@ function start() {
 
   if (fromNumber <= toNumber && amountOfNumbers > 0) {
     drawNumbers(fromNumber, toNumber, amountOfNumbers);
+
+    listCurrentlyDrawnNumbers = [...setCurrentlyDrawnNumbers.keys()];
+
     setHtmlContent('id', 'numbersDrawn', listCurrentlyDrawnNumbers);
   
     document.getElementById('btn-start').classList.remove('container__botao');
@@ -31,11 +35,62 @@ function start() {
 }
 
 function drawNumbers(fromNumber, toNumber, amountOfNumbers) {
-  for (let index = 0; index < amountOfNumbers; index++) {
-    const drawnNumber = getRandomIntInclusive(fromNumber, toNumber);
+  const maxAmountPerformanceLimit = 100;
+  const percentageTolerance = 0.2;
 
-    if (drawnNumber) {
-      listCurrentlyDrawnNumbers.push(drawnNumber);
+  if (((toNumber - fromNumber + 1) >= (amountOfNumbers * percentageTolerance)) && amountOfNumbers > maxAmountPerformanceLimit) {
+    let fromAux = fromNumber;
+    let toAux = toNumber;
+    let listFromToNumbers = [];
+    let mapFromToNumbers = new Map();
+    let currentPercentageTolerance = 0;
+    let currentListLastPosition = 0;
+
+    for (let index = fromAux; index <= toAux; index++) {
+      listFromToNumbers.push(index);
+    }
+    
+    while (listFromToNumbers.length > maxAmountPerformanceLimit) {
+      currentPercentageTolerance = parseInt(listFromToNumbers.length) * percentageTolerance;
+      currentListLastPosition = parseInt(listFromToNumbers.length) - 1;
+      
+      for (let index = 0; index <= currentListLastPosition; index++) {
+        mapFromToNumbers.set(index, listFromToNumbers[index]);
+      }
+      
+      for (let index = 0; index <= currentPercentageTolerance; index++) {
+        const drawnNumber = getRandomIntInclusive(0, currentListLastPosition);
+        setCurrentlyDrawnNumbers.add(mapFromToNumbers.get(drawnNumber));
+        mapFromToNumbers.delete(drawnNumber);
+      }
+
+      listFromToNumbers = [];
+      
+      for (const [key, value] of mapFromToNumbers) {
+        listFromToNumbers.push(value);
+      }
+
+      mapFromToNumbers = new Map();
+      listPreviouslyDrawnNumbers = [];
+    }
+
+    currentListLastPosition = parseInt(listFromToNumbers.length) - 1;
+
+    for (let index = 0; index <= currentListLastPosition; index++) {
+      mapFromToNumbers.set(index, listFromToNumbers[index]);
+    }
+
+    for (let index = 0; index <= currentListLastPosition; index++) {
+      const drawnNumber = getRandomIntInclusive(0, currentListLastPosition);
+      setCurrentlyDrawnNumbers.add(mapFromToNumbers.get(drawnNumber));
+      mapFromToNumbers.delete(drawnNumber);
+    }
+  }
+
+  else {
+    for (let index = 0; index < amountOfNumbers; index++) {
+      const drawnNumber = getRandomIntInclusive(fromNumber, toNumber);
+      setCurrentlyDrawnNumbers.add(drawnNumber);
     }
   }
 }
@@ -47,6 +102,7 @@ function restart() {
   document.getElementById('btn-start').className = 'container__botao';
   document.getElementById('btn-restart').className = 'container__botao-desabilitado';
   setHtmlContent('id', 'numbersDrawn', 'None so far...');
+  setCurrentlyDrawnNumbers = new Set();
   listCurrentlyDrawnNumbers = [];
   listPreviouslyDrawnNumbers = [];
 }
@@ -56,7 +112,6 @@ function getRandomIntInclusive(min, max) {
   max = Math.floor(max);
   let drawnNumber = Math.floor(Math.random() * (max - min + 1)) + min;
 
-  
   if (listPreviouslyDrawnNumbers.includes(drawnNumber)) {
 
     if (listPreviouslyDrawnNumbers.length > (max - min)) {
