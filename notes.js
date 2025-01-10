@@ -43,17 +43,37 @@ for (let index = 0; index < array.length; index++) {
   console.log(element);
 }
 
-// for...of é muito util para percorrer um lista de valores //
+/*
+
+  for...of é muito util para percorrer um lista de valores (Array)
+
+*/
 
 for (const element of elements) {
   console.log(element);
 }
 
-// o for...in é muito util para percorrer valores dentro de um objeto //
+/*
 
-for (let field in studentObject) {
-  console.log(field[chave]);
-  console.log(field.chave);
+  O for...in é muito util para percorrer valores dentro de um Objeto
+
+  Lembrando que para motrar um valor em uma chave devemos fazer como abaixo:
+  - console.log(student['name']);
+
+*/
+
+for (let chave in student) {
+  console.log(chave); // Mostra o nome da chave (Ex.: nome, idade, sexo, etc)
+  // Abaixo não é necessário colocar o valor entre aspas simples
+  console.log(student[chave]); // Retorna os valores dentro de cada CHAVE do objeto student (Ex.: Carlos, 35, Masculino, etc) 
+  console.log(student.chave); // Retorna os valores dentro de cada CAMPO do objeto student (Ex.: Carlos, 35, Masculino, etc)
+  
+  const tipoDeDado = typeof student[chave];
+
+  if (tipoDeDado !== 'object' && tipoDeDado !== 'function') { // Esta linha serve para os casos em que o retorno é do tipo [object Object] ou [function]
+    const texto = `A chave ${chave} tem o valor ${student[chave]}!`
+    console.log(texto);
+  }
 }
 
 /* 
@@ -209,7 +229,7 @@ const studentObject = {
     city: 'cidade tal',
     country: 'pais tal'
   },
-  adresses: [
+  addresses: [
     {
       street: 'rua acola',
       neighborhood: 'bairro acola',
@@ -247,14 +267,16 @@ const student = {
   city: 'new york'
 }
 
-/* 
+/* Util */
 
-  Async -
-  Await -
+Object.keys(obj); // Retorna um Array contendo todas as CHAVES dentro de um Objeto
+Object.values(obj); // Retorna um Array contendo todas os VALORES dentro de um Objeto
+Object.entries(obj); // Retorna um Array contendo todas as COMBINAÇÕES de CHAVE e VALOR dentro de um Objeto
 
-*/
+// Podemos utilizar o Spread operator para espalhar os dados de um objeto e assim conseguir lê-los de forma mais eficiente
+function showAddresses(data1, data2) {
+  console.log('First address: ' + data1);
+  console.log('Second address: ' + data2);
+}
 
-export default defineEventHandler(async (event) => {
-  await mailTransport.sendMail(mailOptions);
-  return{}
-})
+showAddresses(...studentObject.addresses);
