@@ -53,6 +53,12 @@ for (const element of elements) {
   console.log(element);
 }
 
+// OR
+
+for (const [key, value] of elements) {
+  listFromToNumbers.push(value);
+}
+
 /*
 
   O for...in é muito util para percorrer valores dentro de um Objeto
