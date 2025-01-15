@@ -94,19 +94,26 @@ elements.forEach(function (element) {
   console.log(element);
 });
 
-//
+// OR
 
 elements.forEach(element => {
   console.log(element);
 });
 
-//
+// OR
 
 elements.forEach(functionName); // Aqui nao foi necessario passar os parametros da funcao "functionName" pois internamente o forEach ja faz este tratamento
 
 function functionName(element) {
   console.log(element);
 }
+
+// OR
+
+elements.forEach((key, value) => {
+  console.log(key);
+  console.log(value);
+});
 
 /* 
 
